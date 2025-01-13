@@ -101,3 +101,16 @@ describe('fibo function', () => {
       expect(largeFibo).toBe(6765);
     });
   });
+
+  describe('my_display_alpha_reverse_t function', () => {
+    it('should return the alphabet in reverse order', () => {
+      const alpha = my_display_alpha_t(); // "abcdefghijklmnopqrstuvwxyz"
+      const reverseAlpha = my_display_alpha_reverse_t();
+      expect(reverseAlpha).toBe([...alpha].reverse().join(''));
+    });
+  
+    it('should always return the reverse alphabet, ignoring external input', () => {
+      const reverseAlpha = my_display_alpha_reverse_t();
+      expect(reverseAlpha).toBe('zyxwvutsrqponmlkjihgfedcba');
+    });
+  });
