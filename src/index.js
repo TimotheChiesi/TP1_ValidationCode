@@ -43,16 +43,20 @@ export const my_is_posi_neg_t = (nbr) => {
 };
 
 export const fibo = (n) => {
-  if (n <= 0) {
-    return 0;
-  }
- 
-  if (n == 1 || n == 2) {
-   return 1;
-  }
-
-  return fibo(n - 1) + fibo(n - 2);
-};
+    if (!Number.isInteger(n)) {
+      return 0;  // You can throw an error instead: throw new Error('Input must be an integer');
+    } else {
+        if (n <= 0) {
+            return 0;
+        }
+  
+        if (n === 1 || n === 2) {
+            return 1;
+        }
+  
+        return fibo(n - 1) + fibo(n - 2);
+    }    
+  };
 
 export const my_display_alpha_reverse_t = () => {
   const alpha = my_display_alpha_t();

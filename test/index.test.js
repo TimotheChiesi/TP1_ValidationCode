@@ -100,6 +100,16 @@ describe('fibo function', () => {
       const largeFibo = fibo(20); // Calculated manually: 6765
       expect(largeFibo).toBe(6765);
     });
+
+    it('should return 0 for non-integer inputs', () => {
+        const invalidInputs = [3.5, 'string', [], {}, true, null, undefined];
+    
+        invalidInputs.forEach(input => {
+          const result = fibo(input);
+          expect(result).toBe(0);
+        });
+    });
+    
   });
 
   describe('my_display_alpha_reverse_t function', () => {
