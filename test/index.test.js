@@ -74,3 +74,30 @@ describe('my_display_alpha_t function', () => {
       expect(my_is_posi_neg_t(3.14)).toBe('POSITIF');
     });
   });
+
+
+describe('fibo function', () => {
+    it('should return 0 for n <= 0', () => {
+      expect(fibo(0)).toBe(0);
+      expect(fibo(-1)).toBe(0);
+      expect(fibo(-10)).toBe(0);
+    });
+  
+    it('should return 1 for n = 1 or n = 2', () => {
+      expect(fibo(1)).toBe(1);
+      expect(fibo(2)).toBe(1);
+    });
+  
+    it('should correctly calculate Fibonacci numbers for n > 2', () => {
+      expect(fibo(3)).toBe(2); // 1 + 1
+      expect(fibo(4)).toBe(3); // 1 + 2
+      expect(fibo(5)).toBe(5); // 2 + 3
+      expect(fibo(6)).toBe(8); // 3 + 5
+      expect(fibo(10)).toBe(55); // 34 + 21
+    });
+  
+    it('should handle large values of n', () => {
+      const largeFibo = fibo(20); // Calculated manually: 6765
+      expect(largeFibo).toBe(6765);
+    });
+  });
