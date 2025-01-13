@@ -1,4 +1,4 @@
-import {my_alpha_number_t, sum, my_size_alpha_t, my_display_alpha_t} from '../src/';
+import {my_alpha_number_t, sum, my_size_alpha_t, my_display_alpha_t, my_array_alpha_t, my_is_posi_neg_t, fibo, my_display_alpha_reverse_t, my_length_array_t, my_display_unicode_t} from '../src/';
 
 
 describe('my_alpha_number_t', () => {
@@ -40,5 +40,23 @@ describe('my_display_alpha_t function', () => {
     it('should return the lowercase alphabet in correct order', () => {
       const result = my_display_alpha_t();
       expect(result).toBe('abcdefghijklmnopqrstuvwxyz');
+    });
+  });
+
+  describe('my_array_alpha_t function', () => {
+    it('should return an array of characters from the input string', () => {
+      const inputString = 'hello';
+  
+      const result = my_array_alpha_t(inputString);
+  
+      expect(result).toEqual(['h', 'e', 'l', 'l', 'o']);
+    });
+  
+    it('should handle an empty string input', () => {
+      const inputString = '';
+  
+      const result = my_array_alpha_t(inputString);
+  
+      expect(result).toEqual([]);
     });
   });
