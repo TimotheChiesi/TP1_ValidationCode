@@ -33,3 +33,5 @@ Analyse the coding rules with :
 npm run lint
 ```
 # TP1_ValidationCode
+
+Vous trouverez une image nommée "npm_run_test" montrant le résultat ce cette même commande.
