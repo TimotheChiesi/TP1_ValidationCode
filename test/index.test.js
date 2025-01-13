@@ -225,4 +225,162 @@ describe('fibo function', () => {
     });
   });
 
+  describe('tspBrutForce function', () => {
+    it('should return the correct minimum distance and path for a small set of cities', () => {
+      const distances = {
+        A: { B: 10, C: 15, D: 20 },
+        B: { A: 10, C: 35, D: 25 },
+        C: { A: 15, B: 35, D: 30 },
+        D: { A: 20, B: 25, C: 30 }
+      };
+      const { minDistance, meilleurePermutation } = tspBrutForce(distances);
+      expect(minDistance).toBe(80);  // Expected minimal distance
+      expect(meilleurePermutation).toEqual(['A', 'B', 'D', 'C']); // Example of expected best path
+    });
   
+    it('should return infinity for an empty set of cities', () => {
+        const distances = {};
+        const { minDistance, meilleurePermutation } = tspBrutForce(distances);
+        expect(minDistance).toBe(Infinity);
+        expect(meilleurePermutation).toEqual([]);
+    });
+      
+    it('should return correct result for a single city', () => {
+        const distances = { A: {} };  // Only one city, no distances
+        const { minDistance, meilleurePermutation } = tspBrutForce(distances);
+        expect(minDistance).toBe(0); // No travel needed
+        expect(meilleurePermutation).toEqual(['A']); // Only one city
+    });
+  
+    it('should handle a small number of cities correctly', () => {
+      const distances = {
+        A: { B: 10 },
+        B: { A: 10 }
+      };
+      const { minDistance, meilleurePermutation } = tspBrutForce(distances);
+      expect(minDistance).toBe(20);
+      expect(meilleurePermutation).toEqual(['A', 'B']);
+    });
+  });
+  
+  describe('permuter function', () => {
+    it('should return all permutations of a small array', () => {
+      const arr = ['A', 'B', 'C'];
+      const result = permuter(arr);
+      const expected = [
+        ['A', 'B', 'C'],
+        ['A', 'C', 'B'],
+        ['B', 'A', 'C'],
+        ['B', 'C', 'A'],
+        ['C', 'A', 'B'],
+        ['C', 'B', 'A']
+      ];
+      expect(result).toEqual(expected);
+    });
+  
+    it('should return an empty array for an empty input', () => {
+      const arr = [];
+      const result = permuter(arr);
+      expect(result).toEqual([[]]);
+    });
+  
+    it('should return the same array for a single-element input', () => {
+      const arr = ['A'];
+      const result = permuter(arr);
+      expect(result).toEqual([['A']]);
+    });
+  });
+
+  describe('Sudoku Solver', () => {
+    it('should solve a solved Sudoku grid correctly', () => {
+        const solvedGrid = [
+            [5, 3, 4, 6, 7, 8, 9, 1, 2],
+            [6, 7, 2, 1, 9, 5, 3, 4, 8],
+            [1, 9, 8, 3, 4, 2, 5, 6, 7],
+            [8, 5, 9, 7, 6, 1, 4, 2, 3],
+            [4, 2, 6, 8, 5, 3, 7, 9, 1],
+            [7, 1, 3, 9, 2, 4, 8, 5, 6],
+            [9, 6, 1, 5, 3, 7, 2, 8, 4],
+            [2, 8, 7, 4, 1, 9, 6, 3, 5],
+            [3, 4, 5, 2, 8, 6, 1, 7, 9]
+        ];
+
+        const result = resoudreSudoku(solvedGrid);
+        expect(result).toBe(true);
+        expect(solvedGrid).toEqual([
+            [5, 3, 4, 6, 7, 8, 9, 1, 2],
+            [6, 7, 2, 1, 9, 5, 3, 4, 8],
+            [1, 9, 8, 3, 4, 2, 5, 6, 7],
+            [8, 5, 9, 7, 6, 1, 4, 2, 3],
+            [4, 2, 6, 8, 5, 3, 7, 9, 1],
+            [7, 1, 3, 9, 2, 4, 8, 5, 6],
+            [9, 6, 1, 5, 3, 7, 2, 8, 4],
+            [2, 8, 7, 4, 1, 9, 6, 3, 5],
+            [3, 4, 5, 2, 8, 6, 1, 7, 9]
+        ]);
+    });
+
+    it('should solve an unsolved but solvable Sudoku grid', () => {
+        const unsolvedGrid = [
+            [5, 3, 0, 0, 7, 0, 0, 0, 0],
+            [6, 0, 0, 1, 9, 5, 0, 0, 0],
+            [0, 9, 8, 0, 0, 0, 0, 6, 0],
+            [8, 0, 0, 0, 6, 0, 0, 0, 3],
+            [4, 0, 0, 8, 0, 3, 0, 0, 1],
+            [7, 0, 0, 0, 2, 0, 0, 0, 6],
+            [0, 6, 0, 0, 0, 0, 2, 8, 0],
+            [0, 0, 0, 4, 1, 9, 0, 0, 5],
+            [0, 0, 0, 0, 8, 0, 0, 7, 9]
+        ];
+
+        const expectedSolution = [
+            [5, 3, 4, 6, 7, 8, 9, 1, 2],
+            [6, 7, 2, 1, 9, 5, 3, 4, 8],
+            [1, 9, 8, 3, 4, 2, 5, 6, 7],
+            [8, 5, 9, 7, 6, 1, 4, 2, 3],
+            [4, 2, 6, 8, 5, 3, 7, 9, 1],
+            [7, 1, 3, 9, 2, 4, 8, 5, 6],
+            [9, 6, 1, 5, 3, 7, 2, 8, 4],
+            [2, 8, 7, 4, 1, 9, 6, 3, 5],
+            [3, 4, 5, 2, 8, 6, 1, 7, 9]
+        ];
+
+        const result = resoudreSudoku(unsolvedGrid);
+        expect(result).toBe(true);
+        expect(unsolvedGrid).toEqual(expectedSolution);
+    });
+});
+
+describe('estValide function', () => {
+    let grille;
+
+    beforeEach(() => {
+        // A sample 9x9 grid for testing
+        grille = [
+            [5, 3, 4, 6, 7, 8, 9, 1, 2],
+            [6, 7, 2, 1, 9, 5, 3, 4, 8],
+            [1, 9, 8, 3, 4, 2, 5, 6, 7],
+            [8, 5, 9, 7, 6, 1, 4, 2, 3],
+            [4, 2, 6, 8, 5, 3, 7, 9, 1],
+            [7, 1, 3, 9, 2, 4, 8, 5, 6],
+            [9, 6, 1, 5, 3, 7, 2, 8, 4],
+            [2, 8, 7, 4, 1, 9, 6, 3, 5],
+            [3, 4, 5, 2, 8, 6, 1, 7, 9]
+        ];
+    });
+
+    it('should return false if the number already exists in the row', () => {
+        const result = estValide(grille, 0, 0, 5);  // '5' already exists in the first row
+        expect(result).toBe(false);
+    });
+
+    it('should return false if the number already exists in the column', () => {
+        const result = estValide(grille, 0, 0, 6);  // '6' already exists in the first column
+        expect(result).toBe(false);
+    });
+
+    it('should return false if the number already exists in the 3x3 subgrid', () => {
+        const result = estValide(grille, 4, 4, 2);  // '2' already exists in the 3x3 subgrid starting at (3,3)
+        expect(result).toBe(false);
+    });
+});

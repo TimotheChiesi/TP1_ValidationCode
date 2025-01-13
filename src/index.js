@@ -120,24 +120,35 @@ export function quickSort(arr) {
 
 export function tspBrutForce(distances) {
     let villes = Object.keys(distances);
+
+    // If there are no cities, return Infinity
+    if (villes.length === 0) return { minDistance: Infinity, meilleurePermutation: [] };
+
     let permutations = permuter(villes);
     let minDistance = Infinity;
     let meilleurePermutation = [];
-    
+
     permutations.forEach(chemin => {
         let distanceTotale = 0;
         for (let i = 0; i < chemin.length - 1; i++) {
             distanceTotale += distances[chemin[i]][chemin[i + 1]];
         }
         distanceTotale += distances[chemin[chemin.length - 1]][chemin[0]]; // Retour à la ville de départ
-        
+
         if (distanceTotale < minDistance) {
             minDistance = distanceTotale;
             meilleurePermutation = chemin;
         }
     });
+    
+    // Handle the case where there is only one city
+    if (villes.length === 1) {
+        return { minDistance: 0, meilleurePermutation: villes };
+    }
+
     return { minDistance, meilleurePermutation };
 }
+
 
 export function permuter(arr) {
     if (arr.length === 0) return [[]];
@@ -155,22 +166,24 @@ export function permuter(arr) {
 export function resoudreSudoku(grille) {
     for (let ligne = 0; ligne < 9; ligne++) {
         for (let col = 0; col < 9; col++) {
-            if (grille[ligne][col] === 0) {
-                for (let num = 1; num <= 9; num++) {
+            if (grille[ligne][col] === 0) {  // Find an empty cell
+                for (let num = 1; num <= 9; num++) {  // Try numbers 1-9
                     if (estValide(grille, ligne, col, num)) {
                         grille[ligne][col] = num;
                         if (resoudreSudoku(grille)) {
-                            return true;
+                            return true;  // If the solution is found, return true
                         }
-                        grille[ligne][col] = 0; // Backtrack
+                        grille[ligne][col] = 0;  // Backtrack if the number doesn't work
                     }
                 }
-                return false;
+                return false;  // If no valid number can be placed, return false
             }
         }
     }
-    return true;
+    return true;  // If no empty cell is found, the Sudoku is solved
 }
+
+
 
 export function estValide(grille, ligne, col, num) {
     for (let i = 0; i < 9; i++) {
