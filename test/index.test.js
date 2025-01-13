@@ -114,3 +114,29 @@ describe('fibo function', () => {
       expect(reverseAlpha).toBe('zyxwvutsrqponmlkjihgfedcba');
     });
   });
+
+  describe('my_length_array_t function', () => {
+    it('should return the correct length of a non-empty array', () => {
+      const arr = [1, 2, 3, 4, 5];
+      const length = my_length_array_t(arr);
+      expect(length).toBe(5);
+    });
+  
+    it('should return 0 for an empty array', () => {
+      const arr = [];
+      const length = my_length_array_t(arr);
+      expect(length).toBe(0);
+    });
+  
+    it('should handle an array with one element correctly', () => {
+      const arr = [42];
+      const length = my_length_array_t(arr);
+      expect(length).toBe(1);
+    });
+  
+    it('should return 0 when the input is not an array', () => {
+      const notAnArray = 'not an array';
+      const length = my_length_array_t(notAnArray);
+      expect(length).toBe(0);
+    });
+  });

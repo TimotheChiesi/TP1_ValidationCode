@@ -66,14 +66,18 @@ export const my_display_alpha_reverse_t = () => {
 };
 
 export const my_length_array_t = (arr) => {
-  let i = 0;
-
-  while(!!arr[i]) {
-    i += 1;
-  }
-
-  return i;
-};
+    if (!Array.isArray(arr)) {
+      return 0;  // You could throw an error instead if preferred: throw new Error('Input is not an array');
+    }
+  
+    let i = 0;
+  
+    while (arr[i] !== undefined) {
+      i += 1;
+    }
+  
+    return i;
+  };
 
 export const my_display_unicode_t = (arr) => {
   const results = [];
