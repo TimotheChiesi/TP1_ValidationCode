@@ -1,4 +1,4 @@
-import {my_alpha_number_t, sum, my_size_alpha_t, my_display_alpha_t, my_array_alpha_t, my_is_posi_neg_t, fibo, my_display_alpha_reverse_t, my_length_array_t, my_display_unicode_t} from '../src/';
+import {my_alpha_number_t, sum, my_size_alpha_t, my_display_alpha_t, my_array_alpha_t, my_is_posi_neg_t, fibo, my_display_alpha_reverse_t, my_length_array_t, my_display_unicode_t, quickSort, tspBrutForce, permuter, resoudreSudoku, estValide} from '../src/';
 
 
 describe('my_alpha_number_t', () => {
@@ -187,3 +187,42 @@ describe('fibo function', () => {
       expect(result).toBe(expectedOutput);
     });
   });
+
+  describe('quickSort function', () => {
+    it('should correctly sort an array of integers', () => {
+      const input = [4, 3, 1, 5, 2];
+      const expectedOutput = [1, 2, 3, 4, 5];
+      const result = quickSort(input);
+      expect(result).toEqual(expectedOutput);
+    });
+  
+    it('should return the same array if it is already sorted', () => {
+      const input = [1, 2, 3, 4, 5];
+      const expectedOutput = [1, 2, 3, 4, 5];
+      const result = quickSort(input);
+      expect(result).toEqual(expectedOutput);
+    });
+  
+    it('should correctly handle an array with duplicate values', () => {
+      const input = [4, 1, 3, 5, 2, 3];
+      const expectedOutput = [1, 2, 3, 3, 4, 5];
+      const result = quickSort(input);
+      expect(result).toEqual(expectedOutput);
+    });
+  
+    it('should return an empty array when the input is an empty array', () => {
+      const input = [];
+      const expectedOutput = [];
+      const result = quickSort(input);
+      expect(result).toEqual(expectedOutput);
+    });
+  
+    it('should return the same array when it contains only one element', () => {
+      const input = [42];
+      const expectedOutput = [42];
+      const result = quickSort(input);
+      expect(result).toEqual(expectedOutput);
+    });
+  });
+
+  

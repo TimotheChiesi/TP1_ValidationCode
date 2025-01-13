@@ -105,3 +105,83 @@ export const my_display_unicode_t = (arr) => {
 
   return results.join('');
 };
+
+export function quickSort(arr) {
+    if (arr.length <= 1) return arr;
+    let pivot = arr[arr.length - 1];
+    let left = [];
+    let right = [];
+    for (let i = 0; i < arr.length - 1; i++) {
+        if (arr[i] < pivot) left.push(arr[i]);
+        else right.push(arr[i]);
+    }
+    return [...quickSort(left), pivot, ...quickSort(right)];
+}
+
+export function tspBrutForce(distances) {
+    let villes = Object.keys(distances);
+    let permutations = permuter(villes);
+    let minDistance = Infinity;
+    let meilleurePermutation = [];
+    
+    permutations.forEach(chemin => {
+        let distanceTotale = 0;
+        for (let i = 0; i < chemin.length - 1; i++) {
+            distanceTotale += distances[chemin[i]][chemin[i + 1]];
+        }
+        distanceTotale += distances[chemin[chemin.length - 1]][chemin[0]]; // Retour à la ville de départ
+        
+        if (distanceTotale < minDistance) {
+            minDistance = distanceTotale;
+            meilleurePermutation = chemin;
+        }
+    });
+    return { minDistance, meilleurePermutation };
+}
+
+export function permuter(arr) {
+    if (arr.length === 0) return [[]];
+    let result = [];
+    for (let i = 0; i < arr.length; i++) {
+        let reste = arr.slice(0, i).concat(arr.slice(i + 1));
+        let permut = permuter(reste);
+        for (let j = 0; j < permut.length; j++) {
+            result.push([arr[i]].concat(permut[j]));
+        }
+    }
+    return result;
+}
+
+export function resoudreSudoku(grille) {
+    for (let ligne = 0; ligne < 9; ligne++) {
+        for (let col = 0; col < 9; col++) {
+            if (grille[ligne][col] === 0) {
+                for (let num = 1; num <= 9; num++) {
+                    if (estValide(grille, ligne, col, num)) {
+                        grille[ligne][col] = num;
+                        if (resoudreSudoku(grille)) {
+                            return true;
+                        }
+                        grille[ligne][col] = 0; // Backtrack
+                    }
+                }
+                return false;
+            }
+        }
+    }
+    return true;
+}
+
+export function estValide(grille, ligne, col, num) {
+    for (let i = 0; i < 9; i++) {
+        if (grille[ligne][i] === num || grille[i][col] === num) return false;
+    }
+    let startRow = Math.floor(ligne / 3) * 3;
+    let startCol = Math.floor(col / 3) * 3;
+    for (let i = startRow; i < startRow + 3; i++) {
+        for (let j = startCol; j < startCol + 3; j++) {
+            if (grille[i][j] === num) return false;
+        }
+    }
+    return true;
+}
