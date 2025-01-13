@@ -60,3 +60,17 @@ describe('my_display_alpha_t function', () => {
       expect(result).toEqual([]);
     });
   });
+
+  describe('my_is_posi_neg_t function', () => {
+    it('should return "NEGATIVE" for zero or negative numbers', () => {
+      expect(my_is_posi_neg_t(0)).toBe('NEGATIVE');
+      expect(my_is_posi_neg_t(-1)).toBe('NEGATIVE');
+      expect(my_is_posi_neg_t(-100)).toBe('NEGATIVE');
+    });
+  
+    it('should return "POSITIF" for positive numbers', () => {
+      expect(my_is_posi_neg_t(1)).toBe('POSITIF');
+      expect(my_is_posi_neg_t(100)).toBe('POSITIF');
+      expect(my_is_posi_neg_t(3.14)).toBe('POSITIF');
+    });
+  });
