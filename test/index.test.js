@@ -1,4 +1,4 @@
-import {my_alpha_number_t, sum, my_size_alpha_t} from '../src/';
+import {my_alpha_number_t, sum, my_size_alpha_t, my_display_alpha_t} from '../src/';
 
 
 describe('my_alpha_number_t', () => {
@@ -8,7 +8,7 @@ describe('my_alpha_number_t', () => {
   it('Je souhaite passer un argument “bonjour” le retour attendu est “Bonjour”', () => {
     expect(my_alpha_number_t("Bonjour")).toBe('Bonjour');
   });
-  it('Je souhaite passer un argument avec la valeur “” (vide) le retour attendu sera “Hello”', () => {
+  it('Je souhaite passer un argument avec la valeur “” (vide) le retour attendu sera “” vide aussi', () => {
     expect(my_alpha_number_t("")).toBe('');
   });
 });
@@ -30,3 +30,15 @@ describe('my_size_alpha_t', () => {
     expect(my_size_alpha_t(12345)).toBe(0);
     });
 });
+
+describe('my_display_alpha_t function', () => {
+    it('should return a string', () => {
+      const result = my_display_alpha_t();
+      expect(typeof result).toBe('string');
+    });
+  
+    it('should return the lowercase alphabet in correct order', () => {
+      const result = my_display_alpha_t();
+      expect(result).toBe('abcdefghijklmnopqrstuvwxyz');
+    });
+  });
