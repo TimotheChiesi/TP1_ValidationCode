@@ -150,3 +150,40 @@ describe('fibo function', () => {
       expect(length).toBe(0);
     });
   });
+
+  describe('my_display_unicode_t function', () => {
+    it('should correctly convert decimal numbers within specified ranges', () => {
+      const input = [65, 66, 67, 97, 98, 99, 48, 49, 50, 32];
+      const expectedOutput = 'ABCabc012 ';
+      const result = my_display_unicode_t(input);
+      expect(result).toBe(expectedOutput);
+    });
+  
+    it('should return an empty string when given an empty array', () => {
+      const input = [];
+      const expectedOutput = '';
+      const result = my_display_unicode_t(input);
+      expect(result).toBe(expectedOutput);
+    });
+  
+    it('should ignore values outside the valid ranges and not include them in the result', () => {
+      const input = [50, 32, 150, 200, 60];
+      const expectedOutput = '2 ';
+      const result = my_display_unicode_t(input);
+      expect(result).toBe(expectedOutput);
+    });
+  
+    it('should correctly handle a mixed array with both valid and invalid decimal values', () => {
+      const input = [65, 100, 97, 250, 48, 130, 32];
+      const expectedOutput = 'Ada0 ';
+      const result = my_display_unicode_t(input);
+      expect(result).toBe(expectedOutput);
+    });
+  
+    it('should return an empty string for an array of non-matching values', () => {
+      const input = [200, 300, 400];
+      const expectedOutput = '';
+      const result = my_display_unicode_t(input);
+      expect(result).toBe(expectedOutput);
+    });
+  });
